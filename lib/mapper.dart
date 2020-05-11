@@ -247,9 +247,26 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Icon(Icons.location_searching),
           onPressed: () {
             getCurrentLocation();
+            _startLocator();
           }),
     );
     
+  }
+   void _startLocator() {
+    BackgroundLocator.registerLocationUpdate(
+      callback,
+      androidNotificationCallback: notificationCallback,
+      settings: LocationSettings(
+        notificationTitle: "Start Location Tracking",
+        notificationMsg: "Track location in background",
+        wakeLockTime: 20,
+        autoStop: false,
+        interval: 5
+      ),
+    );
+    setState(() {
+      isRunning = true;
+    });
   }
 
 
