@@ -37,9 +37,23 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
 
-  
+Widget _buildTile(Widget child, {Function() onTap}) {
+    return Material(
+      elevation: 14.0,
+      borderRadius: BorderRadius.circular(12.0),
+      shadowColor: Color(0x802196F3),
+      child: InkWell
+      (
+        // Do onTap() if it isn't null, otherwise do something
+        onTap: onTap != null ? () => onTap() : () { },
+        child: child
+      )
+    );
+  }
+
+
+class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
   final bodies = [
@@ -62,20 +76,27 @@ class _MyHomePageState extends State<MyHomePage> {
               boxFit: BoxFit.scaleDown,
             ),
 
-         Column(            
+        
+
+        Column(
+                 
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
+            // bodies[_currentIndex],
+
 
              SizedBox(
                       height: 40,
                     ),
+
+
+
         Row(
   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
   children: 
        <Widget>[
          
-         
-          _buildTile(
+         _buildTile(
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column
@@ -137,7 +158,6 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
 
 
-
           ],
         ),
       ),
@@ -169,7 +189,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 })
           ],
         ),
-        body:  bodies[_currentIndex],
+       
+
+
 
          floatingActionButton:
          Container(
@@ -210,18 +232,5 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ));
   }
-
- Widget _buildTile(Widget child, {Function() onTap}) {
-    return Material(
-      elevation: 14.0,
-      borderRadius: BorderRadius.circular(12.0),
-      shadowColor: Color(0x802196F3),
-      child: InkWell
-      (
-        // Do onTap() if it isn't null, otherwise do something
-        onTap: onTap != null ? () => onTap() : () {  },
-        child: child
-      )
-    );
-  }
+ 
 }

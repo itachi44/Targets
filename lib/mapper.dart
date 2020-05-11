@@ -8,6 +8,18 @@ import 'package:firebase_database/firebase_database.dart';
 import 'sendLoc.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+//imports
+import 'dart:isolate';
+import 'dart:math';
+import 'dart:ui';
+import 'package:background_locator/background_locator.dart';
+import 'package:background_locator/location_dto.dart';
+import 'package:background_locator/location_settings.dart';
+//import 'package:location_permissions/location_permissions.dart';
+import 'file_manager.dart';
+
+//imports
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -19,6 +31,107 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  //modifs
+  ReceivePort port = ReceivePort();
+
+  String logStr = '';
+  bool isRunning;
+  LocationDto lastLocation;
+  DateTime lastTimeLocation;
+  static const String _isolateName = 'LocatorIsolate';
+
+//2
+@override
+  void initState() {
+    super.initState();
+
+    if (IsolateNameServer.lookupPortByName(_isolateName) != null) {
+      IsolateNameServer.removePortNameMapping(_isolateName);
+    }
+
+    IsolateNameServer.registerPortWithName(port.sendPort, _isolateName);
+
+    port.listen(
+      (dynamic data) async {
+        await updateUI(data);
+      },
+    );
+    initPlatformState();
+  }
+
+  //3
+
+  static double dp(double val, int places) {
+    double mod = pow(10.0, places);
+    return ((val * mod).round().toDouble() / mod);
+  }
+
+  static String formatDateLog(DateTime date) {
+    return date.hour.toString() +
+        ":" +
+        date.minute.toString() +
+        ":" +
+        date.second.toString();
+  }
+
+  static String formatLog(LocationDto locationDto) {
+    return dp(locationDto.latitude, 4).toString() +
+        " " +
+        dp(locationDto.longitude, 4).toString();
+  }
+
+  static Future<void> setLog(LocationDto data) async {
+    final date = DateTime.now();
+    await FileManager.writeToLogFile(
+        '${formatDateLog(date)} --> ${formatLog(data)}\n');
+  }
+
+
+
+  //4
+  Future<void> updateUI(LocationDto data) async {
+    final log = await FileManager.readLogFile();
+    setState(() {
+      lastLocation = data;
+      lastTimeLocation = DateTime.now();
+      logStr = log;
+    });
+  }
+
+  Future<void> initPlatformState() async {
+    print('Initializing...');
+    await BackgroundLocator.initialize();
+    logStr = await FileManager.readLogFile();
+    print('Initialization done');
+    final _isRunning = await BackgroundLocator.isRegisterLocationUpdate();
+    setState(() {
+      isRunning = _isRunning;
+    });
+    print('Running ${isRunning.toString()}');
+  }
+
+  static void callback(LocationDto locationDto) async {
+    print('location in dart: ${locationDto.toString()}');
+    await setLog(locationDto);
+    final SendPort send = IsolateNameServer.lookupPortByName(_isolateName);
+    send?.send(locationDto);
+  }
+
+//Notifications facultatif
+  static void notificationCallback() {
+    print('notificationCallback');
+  }
+
+
+
+
+
+
+
+  //modifs <-closed
+
+
 
   Future<void> getLocation() async {
     PermissionStatus permission = await PermissionHandler()
@@ -136,5 +249,8 @@ class _MyHomePageState extends State<MyHomePage> {
             getCurrentLocation();
           }),
     );
+    
   }
+
+
 }
