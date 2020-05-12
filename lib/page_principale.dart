@@ -175,8 +175,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    final Function wp = Screen(MediaQuery.of(context).size).wp;
-    final Function hp = Screen(MediaQuery.of(context).size).hp;
   
    return Scaffold(
         appBar: AppBar(
@@ -199,11 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
     body: bodies[_currentIndex],
 
          floatingActionButton:
-         Container(
-        height: hp(70.0),
-        width: hp(70.0),
-        child: FittedBox(
-          child: 
+    
           FloatingActionButton(
           child: Icon(
             Icons.location_on,
@@ -218,8 +212,8 @@ class _MyHomePageState extends State<MyHomePage> {
             }));
           },
           ),
-        ),
-         ),
+    
+  
         bottomNavigationBar: BottomNavyBar(
           selectedIndex: _currentIndex,
           showElevation: true,
