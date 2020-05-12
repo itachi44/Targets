@@ -4,6 +4,8 @@ import 'package:flutter_maps/persist.dart';
 import 'package:image_auto_slider/image_auto_slider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'settings.dart';
+import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'mapper.dart' as map;
 
@@ -79,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         
 
         Column(
+
                  
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
@@ -86,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
              SizedBox(
-                      height: 40,
+                      height: 15,
                     ),
 
 
@@ -98,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
          
          _buildTile(
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: EdgeInsetsResponsive.all(24.0),
               child: Column
               (
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -111,11 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     shape: CircleBorder(),
                     child: Padding
                     (
-                      padding: const EdgeInsets.all(16.0),
+                      padding:  EdgeInsetsResponsive.all(16.0),
                       child: Icon(Icons.healing, color: Colors.white, size: 30.0),
                     )
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                  Padding(padding: EdgeInsetsResponsive.only(bottom: 16.0)),
                   Text('Auto-Diagnostique', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
                   Text('Faites des tests vous même', style: TextStyle(color: Colors.black45)),
                 ]
@@ -125,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildTile(
             Padding
             (
-              padding: const EdgeInsets.all(24.0),
+              padding:  EdgeInsetsResponsive.all(24.0),
               child: Column
               (
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -138,11 +141,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     shape: CircleBorder(),
                     child: Padding
                     (
-                      padding: EdgeInsets.all(16.0),
+                      padding: EdgeInsetsResponsive.all(16.0),
                       child: Icon(Icons.notifications, color: Colors.white, size: 30.0),
                     )
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                  Padding(padding: EdgeInsetsResponsive.only(bottom: 16.0)),
                   Text('Alerts', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
                   Text('Nous prévenir ', style: TextStyle(color: Colors.black45)),
                 ]
@@ -172,7 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final Function wp = Screen(MediaQuery.of(context).size).wp;
+    final Function hp = Screen(MediaQuery.of(context).size).hp;
+  
+   return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
           centerTitle: true,
@@ -194,15 +200,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
          floatingActionButton:
          Container(
-        height: 70.0,
-        width: 70.0,
+        height: hp(70.0),
+        width: hp(70.0),
         child: FittedBox(
           child: 
           FloatingActionButton(
           child: Icon(
             Icons.location_on,
             color: Colors.red,
-            size: 60.0,
+            size: 20.0,
           ),
           backgroundColor: Colors.white,
           onPressed: () {
@@ -221,15 +227,17 @@ class _MyHomePageState extends State<MyHomePage> {
             _currentIndex = index;
           }),
           items: <BottomNavyBarItem>[
-            BottomNavyBarItem(title: Text('Accueil'), icon: Icon(Icons.home,size: 30,)),
+            BottomNavyBarItem(title: Text('Accueil'), icon: Icon(Icons.home,size: 27,)),
             BottomNavyBarItem(
-                title: Text('stats'), icon: Icon(Icons.assessment,size: 30,),),
+                title: Text('stats'), icon: Icon(Icons.assessment,size: 27,),),
             BottomNavyBarItem(
-                title: Text('profil'), icon: Icon(Icons.account_circle,size:30)),
+                title: Text('profil'), icon: Icon(Icons.account_circle,size:27)),
             BottomNavyBarItem(
-                title: Text('inviter'), icon: Icon(Icons.group_add, size:30,)),
+                title: Text('inviter'), icon: Icon(Icons.group_add, size:27,)),
           ],
-        ));
+        )
+ 
+        );
   }
  
 }
