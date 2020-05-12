@@ -4,8 +4,6 @@ import 'package:flutter_maps/persist.dart';
 import 'package:image_auto_slider/image_auto_slider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'settings.dart';
-import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'mapper.dart' as map;
 
@@ -101,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
          
          _buildTile(
             Padding(
-              padding: EdgeInsetsResponsive.all(24.0),
+              padding: EdgeInsets.all(24.0),
               child: Column
               (
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -114,11 +112,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     shape: CircleBorder(),
                     child: Padding
                     (
-                      padding:  EdgeInsetsResponsive.all(16.0),
+                      padding:  EdgeInsets.all(16.0),
                       child: Icon(Icons.healing, color: Colors.white, size: 30.0),
                     )
                   ),
-                  Padding(padding: EdgeInsetsResponsive.only(bottom: 16.0)),
+                  Padding(padding: EdgeInsets.only(bottom: 16.0)),
                   Text('Auto-Diagnostique', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
                   Text('Faites des tests vous même', style: TextStyle(color: Colors.black45)),
                 ]
@@ -128,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildTile(
             Padding
             (
-              padding:  EdgeInsetsResponsive.all(24.0),
+              padding:  EdgeInsets.all(24.0),
               child: Column
               (
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -141,11 +139,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     shape: CircleBorder(),
                     child: Padding
                     (
-                      padding: EdgeInsetsResponsive.all(16.0),
+                      padding: EdgeInsets.all(16.0),
                       child: Icon(Icons.notifications, color: Colors.white, size: 30.0),
                     )
                   ),
-                  Padding(padding: EdgeInsetsResponsive.only(bottom: 16.0)),
+                  Padding(padding: EdgeInsets.only(bottom: 16.0)),
                   Text('Alerts', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
                   Text('Nous prévenir ', style: TextStyle(color: Colors.black45)),
                 ]
@@ -202,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Icon(
             Icons.location_on,
             color: Colors.red,
-            size: 20.0,
+            size: 40.0,
           ),
           backgroundColor: Colors.white,
           onPressed: () {
