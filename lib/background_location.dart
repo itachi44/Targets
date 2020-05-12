@@ -11,14 +11,12 @@ import 'package:location_permissions/location_permissions.dart';
 
 import 'file_manager.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
+class BgLocation extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _BgLocationState createState() => _BgLocationState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _BgLocationState extends State<BgLocation> {
   ReceivePort port = ReceivePort();
 
   String logStr = '';
@@ -57,7 +55,7 @@ class _MyAppState extends State<MyApp> {
         ":" +
         date.second.toString();
   }
-//écriture des données dans le log-file
+
   static String formatLog(LocationDto locationDto) {
     return dp(locationDto.latitude, 4).toString() +
         " " +
@@ -162,7 +160,7 @@ class _MyAppState extends State<MyApp> {
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[start, stop, clear, status, log],
+              children: <Widget>[start,log],
             ),
           ),
         ),

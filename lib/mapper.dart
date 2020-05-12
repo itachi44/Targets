@@ -227,8 +227,23 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
+
+    final start = SizedBox(
+      width: double.maxFinite,
+      child: RaisedButton(
+        child: Text('Start'),
+        onPressed: () {
+         _startLocator();
+        },
+      ),
+    );
+    final log = Text(
+      logStr,
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -241,8 +256,13 @@ class _MyHomePageState extends State<MyHomePage> {
         onMapCreated: (GoogleMapController controller) {
           _controller = controller;
         },
-
       ),
+
+      
+
+     
+
+
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.location_searching),
           onPressed: () {
