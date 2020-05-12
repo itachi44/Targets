@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                  
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-            // bodies[_currentIndex],
+            // 
 
 
              SizedBox(
@@ -190,8 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
        
-
-
+    body: bodies[_currentIndex],
 
          floatingActionButton:
          Container(
