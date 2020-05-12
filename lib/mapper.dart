@@ -230,25 +230,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    final start = SizedBox(
-      width: double.maxFinite,
-      child: RaisedButton(
-        child: Text('Start'),
-        onPressed: () {
-         _startLocator();
-        },
-      ),
-    );
-    final log = Text(
-      logStr,
+    Text(
+      logStr
     );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title:  Text(logStr),
       ),
       body: GoogleMap(
+
         mapType: MapType.hybrid,
         initialCameraPosition: initialLocation,
         markers: Set.of((marker != null) ? [marker] : []),
@@ -257,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _controller = controller;
         },
       ),
-
+  
       
 
      
@@ -272,6 +263,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     
   }
+
+  
    void _startLocator() {
     BackgroundLocator.registerLocationUpdate(
       callback,

@@ -8,6 +8,7 @@ import 'package:background_locator/location_dto.dart';
 import 'package:background_locator/location_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:location_permissions/location_permissions.dart';
+import './background_location.dart';
 
 import 'file_manager.dart';
 

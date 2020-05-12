@@ -8,7 +8,6 @@ import 'splashScreen.dart' as sc;
 import 'mapper.dart' as map;
 import 'package:flutter/services.dart';
 import './page_principale.dart';
-import './background_location.dart';
 
 
 void main() {
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:BgLocation(),//GettingStartedScreen(),
+      home:GettingStartedScreen(),
       routes: {
         LoginScreen.routeName: (ctx) => LoginScreen(),
         SignupScreen.routeName: (ctx) => SignupScreen(),
