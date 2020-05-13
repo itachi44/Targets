@@ -9,7 +9,6 @@ import 'mapper.dart' as map;
 import 'package:flutter/services.dart';
 import './page_principale.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
