@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:page_transition/page_transition.dart';
-
 
 
 class ForgetPasswordPage extends StatefulWidget{

@@ -30,7 +30,7 @@ class _SplashState extends State<Splash> {
         style: new TextStyle(fontWeight: FontWeight.bold, 
             fontSize: 20.0),
       ),
-      seconds: 6,
+      seconds: (userId==null)?6:3,
       navigateAfterSeconds: (userId==null)? main.MyApp(): home.MyApp(userid: userId,),
       image: new Image.asset('assets/loading.gif'),
       backgroundColor: Colors.black,

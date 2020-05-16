@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter_maps/persist.dart';
 import 'user.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_button/nice_button.dart';
 import 'package:flutter_maps/page_principale.dart' as pp;
-import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:flutter_bounce/flutter_bounce.dart';
-import 'package:page_transition/page_transition.dart';
 
 
 
@@ -73,33 +70,21 @@ class _SignupScreenState extends State<SignupScreen> {
         user.id = docs.documents[0].documentID;
         user.nom = data["nom"];
         user.prenom = data["prenom"];
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-            pp.MyApp(userid: user.id,)), (Route<dynamic> route) => false);
+        Persist p = new Persist();
+        p.setId(user.id);
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+          pp.MyApp(userid: user.id,)), (Route<dynamic> route) => false);
       }
       else {
         print("There is nothing");
-        _showDialog("Connection au serveur impossible", "Veuillez attendre un instant...");
+        _showDialog("Connexion au serveur impossible", "Veuillez attendre un instant...");
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final Function wp = Screen(MediaQuery.of(context).size).wp;
-    final Function hp = Screen(MediaQuery.of(context).size).hp;
-
-    ResponsiveWidgets.init(context,
-		    height: 1920, // Optional
-		    width: 1080, // Optional
-			allowFontScaling: true, // Optional
-	    );
-
-  return  ResponsiveWidgets.builder(
-			height: 1920, // Optional
-		    width: 1080, // Optional
-			allowFontScaling: true, // Optional
-
- child :Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Inscription'),
         elevation: 10,
@@ -113,8 +98,8 @@ class _SignupScreenState extends State<SignupScreen> {
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return ContainerResponsive(
-            padding: EdgeInsetsResponsive.symmetric(
+          return Container(
+            padding: const EdgeInsets.symmetric(
               horizontal: 30,
             ),
             color: Color(0xff37474f),
@@ -128,17 +113,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                     SizedBox(
-                      height: hp(2),
-                    ),
-
                     Image.asset(
                       'assets/images/logo.png',
-                      height: hp(15),
-                      
+                      height: 130,
                     ),
                     SizedBox(
-                      height: hp(2),
+                      height: 20,
                     ),
                     TextField(
                       style: TextStyle(fontSize: 18, color: Colors.black54),
@@ -146,7 +126,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         hintText: 'Prénom',
-                        contentPadding:  EdgeInsetsResponsive.all(15),
+                        contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(5),
@@ -163,7 +143,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     SizedBox(
-                      height: hp(2),
+                      height: 20,
                     ),
                     
                     TextField(
@@ -172,7 +152,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         hintText: 'Nom',
-                        contentPadding:  EdgeInsetsResponsive.all(15),
+                        contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(5),
@@ -189,7 +169,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     SizedBox(
-                      height: hp(2),
+                      height: 20,
                     ),
                     TextField(
                       keyboardType: TextInputType.phone,
@@ -198,7 +178,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         hintText: 'Téléphone',
-                        contentPadding: EdgeInsetsResponsive.all(15),
+                        contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(10),
@@ -216,7 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     SizedBox(
-                      height: hp(2),
+                      height: 20,
                     ),
                     TextField(
                       obscureText: true,
@@ -225,7 +205,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         hintText: 'Mot de passe',
-                        contentPadding: EdgeInsetsResponsive.all(15),
+                        contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(5),
@@ -242,7 +222,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     SizedBox(
-                      height: hp(2),
+                      height: 20,
                     ),
                     TextField(
                       obscureText: true,
@@ -251,7 +231,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         hintText: 'Confirmer le mot de passe',
-                        contentPadding:  EdgeInsetsResponsive.all(15),
+                        contentPadding: const EdgeInsets.all(15),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(5),
@@ -269,7 +249,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     SizedBox(
-                      height: hp(2),
+                      height: 10,
                     ),
                     Text(
                       _message,
@@ -278,16 +258,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: hp(2),
+                      height: 10,
                     ),
-
-                    Bounce(
-                    duration: Duration(milliseconds: 100),
-                    child:
-                     NiceButton(
+                    NiceButton(
                       background:secondColor ,
                       radius: 40,
-                      padding: EdgeInsetsResponsive.all(30),
+                      padding: const EdgeInsets.all(15),
                       text: "S'inscrire",
                       gradientColors: [secondColor, firstColor],
                       onPressed: (){
@@ -297,8 +273,10 @@ class _SignupScreenState extends State<SignupScreen> {
                             if(_tel.length==9){
                               user = new User(_prenom, _nom, _tel, _mdp);
                               user.addNewUser();
-                                    signIn(user.tel, user.mdp);
-                                }
+                              signIn(user.tel, user.mdp);
+                              
+                            }
+                            else _showDialog("Numéro de téléphone", "Vérifier votre numéro de téléphone");
                           }
                           else _showDialog("Probléme de connection.", "Verifier votre connection internet!");
                         }catch(e){
@@ -306,8 +284,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         }
                       },
                     )
-                 ),
-                    
                   ],
                 ),
               ),
@@ -315,7 +291,6 @@ class _SignupScreenState extends State<SignupScreen> {
           );
         },
       ),
- ),
     );
   }
 }

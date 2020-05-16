@@ -17,6 +17,7 @@ class User {
       "nom": nom,
       "mdp": mdp,
       "tel": tel,
+      "autorisation": false,
     };
   }
   addNewUser() async{

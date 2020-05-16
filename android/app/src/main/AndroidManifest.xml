@@ -13,7 +13,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_maps"
+        android:label="Corona_Targets"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDFlSpy-0U3CALlwCw-HIqJ_ls_-1nm8NE"/>

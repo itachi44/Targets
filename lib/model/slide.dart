@@ -14,7 +14,7 @@ class Slide {
 
 final slideList = [
   Slide(
-    imageUrl: 'assets/images/image1.png',
+    imageUrl: 'assets/images/image1.jpg',
     title: 'Venir à bout du Corona Virus!',
     description: 'Le virus gagne du terrain!, chaque jour la proportion d\'individus contaminés ne cesse de croitre. \nArretons la propagation du virus dès maintenant',
   ),
